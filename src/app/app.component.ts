@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,27 @@ export class AppComponent {
 
   defaultTitle = 'Ajari Test App';
 
-  data$ = this.activeRoute.data.do(console.log);
-  title$ = this.data$.pluck('title').map(t => t || this.defaultTitle);
+  routerData$ = this.router.events
+    .filter(event => event instanceof NavigationEnd)
+    .map(() => this.activatedRoute)
+    .map(route => {
+      while (route.firstChild) {
+        route = route.firstChild;
+      }
+      return route;
+    })
+    .filter(route => route.outlet === 'primary')
+    .mergeMap(route => route.data);
+
+  title$ = this.routerData$
+    .pluck<any, string>('title')
+    .map(t => t || this.defaultTitle)
+    .do(t => this.title.setTitle(t));
 
   constructor(
-    private activeRoute: ActivatedRoute,
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private title: Title
+  ) { }
 
 }

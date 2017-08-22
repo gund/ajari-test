@@ -8,7 +8,7 @@ const IMPORT_AND_EXPORT = [
   MaterialModule,
 ];
 
-const DECLARE_AND_EXPORT = [
+const DECLARE_AND_EXPORT: any[] = [
 ];
 
 @NgModule({
