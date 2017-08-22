@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+
+  defaultTitle = 'Ajari Test App';
+
+  data$ = this.activeRoute.data.do(console.log);
+  title$ = this.data$.pluck('title').map(t => t || this.defaultTitle);
+
+  constructor(
+    private activeRoute: ActivatedRoute,
+  ) {}
+
 }
