@@ -4,6 +4,7 @@ import {
   MdCardModule,
   MdIconModule,
   MdListModule,
+  MdMenuModule,
   MdSidenavModule,
   MdToolbarModule,
 } from '@angular/material';
@@ -15,6 +16,7 @@ const IMPORT_AND_EXPORT = [
   MdListModule,
   MdSidenavModule,
   MdIconModule,
+  MdMenuModule,
 ];
 
 @NgModule({
