@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+.example-container {
+  height: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.example-sidenav {
+  margin-left: -1rem;
+  max-width: 30%;
+}

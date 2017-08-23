@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { DynamicMenuService } from './dynamic-menu/dynamic-menu.service';
 
 @Component({
   selector: 'app-case-one',
   templateUrl: './case-one.component.html',
   styleUrls: ['./case-one.component.scss']
 })
-export class CaseOneComponent implements OnInit {
+export class CaseOneComponent {
 
-  constructor() { }
+  menu$ = this.dynamicMenuService.getMenu();
 
-  ngOnInit() {
-  }
+  constructor(
+    private dynamicMenuService: DynamicMenuService,
+  ) { }
 
 }

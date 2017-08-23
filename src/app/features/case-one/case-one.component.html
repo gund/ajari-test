@@ -1,3 +1,10 @@
-<p>
-  case-one works!
-</p>
+<md-sidenav-container class="example-container">
+  <md-sidenav [opened]="true" [disableClose]="true" mode="side" class="example-sidenav">
+    <app-dynamic-menu [menu]="menu$ | async"></app-dynamic-menu>
+  </md-sidenav>
+
+  <div class="example-sidenav-content">
+    <h3 class="mat-typography">Dynamic menu is rendered here!</h3>
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-container>

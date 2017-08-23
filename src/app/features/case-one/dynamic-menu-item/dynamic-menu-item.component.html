@@ -1,0 +1,13 @@
+<md-list-item>
+  <ng-container *ngIf="menu.link; then linkItem; else btnItem"></ng-container>
+  <ng-template #linkItem>
+    <a md-line [routerLink]="linkUrl">{{ menu.name }}</a>
+    <button md-icon-button *ngIf="hasChildren" (click)="toggleChildren()">^</button>
+  </ng-template>
+  <ng-template #btnItem>
+    <button md-button (click)="toggleChildren()">{{ menu.name }}</button>
+  </ng-template>
+</md-list-item>
+<md-list *ngIf="hasChildren && showChildren">
+  <app-dynamic-menu-item *ngFor="let link of menu.children" [menu]="link" [parentLink]="linkUrl"></app-dynamic-menu-item>
+</md-list>

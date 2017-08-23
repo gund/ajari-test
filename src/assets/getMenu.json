@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Dashboard",
+    "children": [
+      {
+        "name": "Reports",
+        "link": "reports"
+      },
+      {
+        "name": "Statistics",
+        "link": "statistics"
+      },
+      {
+        "name": "Overview",
+        "link": "overview"
+      },
+      {
+        "name": "Settings",
+        "link": "settings"
+      }
+    ]
+  }
+]
