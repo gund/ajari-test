@@ -16,16 +16,18 @@ export class AppComponent {
     .filter(event => event instanceof NavigationEnd)
     .map(() => this.activatedRoute)
     .map(route => {
+      let lastData = route.data;
       while (route.firstChild) {
+        lastData = route.data;
         route = route.firstChild;
       }
-      return route;
+      return { route, lastData };
     })
-    .filter(route => route.outlet === 'primary')
-    .mergeMap(route => route.data);
+    .filter(({ route, lastData }) => route.outlet === 'primary' || !!lastData)
+    .mergeMap(({ route, lastData }) => route.data.combineLatest(lastData));
 
   title$ = this.routerData$
-    .pluck<any, string>('title')
+    .map(([data, lastData]) => data['title'] || lastData['title'])
     .map(t => t || this.defaultTitle)
     .do(t => this.title.setTitle(t));
 
