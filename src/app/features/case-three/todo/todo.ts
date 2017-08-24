@@ -3,3 +3,7 @@ export interface TodoItem {
   name: string;
   done: boolean;
 }
+
+export type Optional<T> = {
+  [P in keyof T]?: T[P];
+};

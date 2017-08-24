@@ -8,3 +8,8 @@ import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/publishBehavior';
 import 'rxjs/add/operator/publishLast';
+import 'rxjs/add/operator/merge';
+import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/take';

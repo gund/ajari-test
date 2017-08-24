@@ -1,5 +1,9 @@
+<h3 *ngIf="loading$ | async">Loading list...</h3>
+<h3 *ngIf="working$ | async">Applying change...</h3>
 <app-todo [items]="todos$ | async"
   (onCheck)="check($event)"
   (onUncheck)="uncheck($event)"
   (onRemove)="remove($event)"
   ></app-todo>
+
+<app-todo [items]="todos$ | async"></app-todo>
