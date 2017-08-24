@@ -72,6 +72,7 @@ const api = express()
     }
   });
 
+app.use(express.static('dist'));
 app.use(bodyParser());
 app.use('/api', api);
 
