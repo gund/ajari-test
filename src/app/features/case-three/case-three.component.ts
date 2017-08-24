@@ -12,7 +12,8 @@ import { TodoService } from './todo/todo.service';
 })
 export class CaseThreeComponent {
 
-  todos$ = this.todoService.getTodoList();
+  todos$ = this.todoService.getTodoList()
+    .catch(e => this._handleError(e, []));
 
   addItem$ = new Subject<TodoItem>();
   updateItem$ = new Subject<[TodoItem, Optional<TodoItem>]>();
@@ -66,9 +67,9 @@ export class CaseThreeComponent {
     this.removeItem$.next(item);
   }
 
-  private _handleError(err: string) {
+  private _handleError(err: string, data?: any) {
     this.error$.next(err);
-    return Observable.of();
+    return Observable.of(data);
   }
 
 }
