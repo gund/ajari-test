@@ -14,7 +14,8 @@
     "e2e": "ng e2e",
     "server": "ts-node src/server.ts",
     "build:prod": "ng build --prod",
-    "build:pwa": "ts-node scripts/build-pwa.ts"
+    "build:pwa": "ts-node scripts/build-pwa.ts",
+    "uglify": "uglifyjs"
   },
   "private": true,
   "dependencies": {
@@ -40,7 +41,12 @@
     "ng-pwa-tools": "^0.0.15",
     "ng-router-resolver": "^0.1.1",
     "npm-run-all": "^4.0.2",
+    "rollup": "^0.48.2",
+    "rollup-plugin-commonjs": "^8.2.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-typescript2": "^0.5.1",
     "rxjs": "^5.4.2",
+    "uglify-js": "^3.0.28",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
