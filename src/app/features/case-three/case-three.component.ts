@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Optional, TodoItem } from './todo/todo';
@@ -16,10 +17,19 @@ export class CaseThreeComponent {
   addItem$ = new Subject<TodoItem>();
   updateItem$ = new Subject<[TodoItem, Optional<TodoItem>]>();
   removeItem$ = new Subject<TodoItem>();
+  error$ = new Subject<string>();
 
-  addingItem$ = this.addItem$.switchMap(item => this.todoService.addItem(item));
-  updatingItem$ = this.updateItem$.switchMap(([item, newItem]) => this.todoService.updateItem(item, newItem));
-  removingItem$ = this.removeItem$.switchMap(item => this.todoService.removeItem(item));
+  addingItem$ = this.addItem$
+    .switchMap(item => this.todoService.addItem(item)
+      .catch(e => this._handleError(e)));
+
+  updatingItem$ = this.updateItem$
+    .switchMap(([item, newItem]) => this.todoService.updateItem(item, newItem)
+      .catch(e => this._handleError(e)));
+
+  removingItem$ = this.removeItem$
+    .switchMap(item => this.todoService.removeItem(item)
+      .catch(e => this._handleError(e)));
 
   loading$ = this.todos$
     .startWith(null)
@@ -27,6 +37,7 @@ export class CaseThreeComponent {
 
   startWorking$ = this.addItem$
     .merge(this.updateItem$, this.removeItem$)
+    .do(() => this.error$.next(''))
     .map(() => true);
 
   endWorking$ = this.addingItem$
@@ -44,17 +55,20 @@ export class CaseThreeComponent {
   }
 
   check(item: TodoItem) {
-    console.log('check', item);
     this.updateItem$.next([item, { done: true }]);
   }
 
   uncheck(item: TodoItem) {
-    console.log('uncheck', item);
     this.updateItem$.next([item, { done: false }]);
   }
 
   remove(item: TodoItem) {
     this.removeItem$.next(item);
+  }
+
+  private _handleError(err: string) {
+    this.error$.next(err);
+    return Observable.of();
   }
 
 }

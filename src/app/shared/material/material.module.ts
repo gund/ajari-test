@@ -8,6 +8,7 @@ import {
   MdSidenavModule,
   MdToolbarModule,
   MdCheckboxModule,
+  MdInputModule,
 } from '@angular/material';
 
 const IMPORT_AND_EXPORT = [
@@ -19,6 +20,7 @@ const IMPORT_AND_EXPORT = [
   MdIconModule,
   MdMenuModule,
   MdCheckboxModule,
+  MdInputModule,
 ];
 
 @NgModule({

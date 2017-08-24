@@ -1,7 +1,20 @@
 <h3 *ngIf="loading$ | async">Loading list...</h3>
 <h3 *ngIf="working$ | async">Applying change...</h3>
-<app-todo [items]="todos$ | async"
-  (onCheck)="check($event)"
-  (onUncheck)="uncheck($event)"
-  (onRemove)="remove($event)"
-  ></app-todo>
+
+<div class="mat-h4" *ngIf="error$ | async; let error">{{ error }}</div>
+
+<md-card>
+  <app-todo [items]="todos$ | async"
+    (onCheck)="check($event)"
+    (onUncheck)="uncheck($event)"
+    (onRemove)="remove($event)"
+    ></app-todo>
+
+  <md-input-container>
+    <input #name mdInput placeholder="New Todo Name">
+  </md-input-container>
+  <button md-button
+    (keydown.enter)="add(name.value);name.value=''"
+    (click)="add(name.value);name.value='';name.focus()"
+    >Add Todo</button>
+</md-card>

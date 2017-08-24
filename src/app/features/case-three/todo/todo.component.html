@@ -1,5 +1,6 @@
 <md-list>
   <h3 md-subheader>Todo List</h3>
+  <div *ngIf="!items?.length" class="mat-typography">Empty list</div>
   <md-list-item *ngFor="let item of items">
     <md-checkbox md-line [checked]="item.done" (change)="itemUpdated(item, $event)">{{ item.name }}</md-checkbox>
     <div class="actions">
