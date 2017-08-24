@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'case-two',
     loadChildren: './features/case-two/case-two.module.ts#CaseTwoModule',
   },
+  {
+    path: 'case-three',
+    loadChildren: './features/case-three/case-three.module.ts#CaseThreeModule',
+  },
 ];
 
 @NgModule({
