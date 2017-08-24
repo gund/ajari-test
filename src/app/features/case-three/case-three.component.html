@@ -1,3 +1,5 @@
-<p>
-  case-three works!
-</p>
+<app-todo [items]="todos$ | async"
+  (onCheck)="check($event)"
+  (onUncheck)="uncheck($event)"
+  (onRemove)="remove($event)"
+  ></app-todo>
