@@ -1,5 +1,27 @@
 # AjariTest
 
+## Before running
+
+```bash
+$ npm install
+```
+(or)
+```bash
+$ yarn install
+```
+
+## Running
+
+```bash
+$ npm run serve
+```
+
+Wait until app will compile and server will boot up.
+
+Then navigate to `localhost:8088` and enjoy!
+
+## Other info
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.0.
 
 ## Development server
