@@ -19,3 +19,10 @@
     (click)="add(name.value);name.value='';name.focus()"
     >Add Todo</button>
 </md-card>
+
+<div>
+  To test this feature you will have to use
+  Chrome DevTools: Check offline box, trigger an action,
+  than go back online, and in Application trigger ServiceWorker Sync event
+  After that all your actions will be replayed to the server
+</div>
