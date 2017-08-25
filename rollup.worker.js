@@ -16,7 +16,8 @@ export default {
     commonjs({
       include: 'node_modules/**',
       namedExports: {
-        'node_modules/jshashes/hashes.js': ['SHA1']
+        'node_modules/jshashes/hashes.js': ['SHA1'],
+        'node_modules/idb-keyval/idb-keyval.js': ['clear', 'get', 'set'],
       },
     }),
     typescript(),

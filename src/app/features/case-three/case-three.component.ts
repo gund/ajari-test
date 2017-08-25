@@ -1,3 +1,4 @@
+import { BackgroundHttpService } from '../background-sync/background-http.service';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -47,8 +48,11 @@ export class CaseThreeComponent {
 
   working$ = this.startWorking$.merge(this.endWorking$);
 
+  pendingSyncs$ = this.bgHttp.pendingSyncs$;
+
   constructor(
-    private todoService: TodoService
+    private todoService: TodoService,
+    private bgHttp: BackgroundHttpService,
   ) { }
 
   add(name: string) {

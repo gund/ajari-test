@@ -1,5 +1,6 @@
 <h3 *ngIf="loading$ | async">Loading list...</h3>
 <h3 *ngIf="working$ | async">Applying change...</h3>
+<h3 *ngIf="pendingSyncs$ | async; let pendingSyncs">Pending syncs: {{ pendingSyncs }}</h3>
 
 <div class="mat-h4" *ngIf="error$ | async; let error">{{ error }}</div>
 

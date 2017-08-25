@@ -1,3 +1,5 @@
+import { BackgroundHttpService } from '../../background-sync/background-http.service';
+import { BackgroundSyncService } from '../../background-sync/background-sync.service';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -17,6 +19,7 @@ export class TodoService {
 
   constructor(
     private http: Http,
+    private bgHttp: BackgroundHttpService,
   ) { }
 
   getTodoList(): Observable<TodoItem[]> {
@@ -26,7 +29,7 @@ export class TodoService {
   }
 
   addItem(item: TodoItem): Observable<TodoItem> {
-    return this.http.post('/api/todo', item)
+    return this.bgHttp.post('/api/todo', item)
       .map(r => r.json() as TodoItem)
       .combineLatest(this.getTodoList().take(1))
       .do(([newItem, list]) => this.setTodos$.next([...list, item]))
@@ -34,7 +37,7 @@ export class TodoService {
   }
 
   updateItem(item: TodoItem, updateItem: Optional<TodoItem>): Observable<TodoItem> {
-    return this.http.patch(`/api/todo/${item.id}`, updateItem)
+    return this.bgHttp.patch(`/api/todo/${item.id}`, updateItem)
       .map(r => r.json() as TodoItem)
       .combineLatest(this.getTodoList().take(1))
       .do(([newItem, list]) => this.setTodos$.next([
@@ -46,7 +49,7 @@ export class TodoService {
   }
 
   removeItem(item: TodoItem): Observable<void> {
-    return this.http.delete(`/api/todo/${item.id}`)
+    return this.bgHttp.delete(`/api/todo/${item.id}`)
       .switchMap(() => this.getTodoList().take(1))
       .do(list => this.setTodos$.next([...list.filter(i => i.id !== item.id)]))
       .map(() => void 0);
